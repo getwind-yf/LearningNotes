@@ -20,3 +20,28 @@
 旧版本的Mesh Draw Pipleline：
 FPrimitiveSceneProxy -> FMeshBatch -> 调用方法RenderBasePase() -> Set of RHICommandList commands -> DrawindexedPrimitive 
 经过可见性测试的PrimitiveSceneProxy利用其接口收集不同 
+
+
+
+-FMeshPassProcessor主要作用是：
+  - Pass过滤
+  - 选择绘制命令所需的Shader及渲染状态
+  - 收集绘制命令及Shader的资源绑定 
+  - 收集Draw Call相关的参数
+
+从RHICommandList到GPU
+- RHI全程是Rendering Hardware Interface（渲染硬件接口），是不同图形API的抽象层，负责收录与图形API无关的中间层绘制指令和数据 
+
+
+总结：
+优化的内容 
+- 绘制调用合并 FMeshDrawCommands 
+- 动态实例化 
+- 并行绘制 
+- 缓存绘制指令 
+- 提升缓存命中率
+
+
+
+
+
