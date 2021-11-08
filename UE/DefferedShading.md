@@ -40,8 +40,14 @@ Lighting Pass:
 - 优劣：优点是跟物体数量
 
 
+延迟着色渲染器代码详解 
+- FSceneRenderer 场景渲染器的父类，用于处理和渲染场景，生成RHI层的渲染指令 
+  - 数据成员包括：FScene* Scene, FSceneViewFamily ViewFamily, TArray<FViewInfo> Views;  FMeshElementCollector MeshCollector //网格收集器;   FMeshElementCollector RayTracingCollector; TArray<FVisibleLightInfo, SceneRenderingAllocator> VisibleLightInfos // 可见的光源信息；
+  - 流程方面：渲染流程和MeshPass; 阴影渲染；光源接口；可见性接口；其他接口 
+  - 调用过程：FSceneRenderer由游戏线程FRendererModule::BeginRenderingViewFamily创建和初始化，传递给渲染线程，接着线程会调用FSceneRenderer::Render(), FSceneRenderer会被每帧创建和销毁；
+  - FSceneRenderer 有两个子类： FMobileSceneRenderer 和 FDeferredShadingSceneRenderer （前者是移动平台的前向渲染，后者是PC和主机平台包含前向和延迟）
 
-
+- FDeferredShadingSceneRenderer  
 
 
 
